@@ -16,6 +16,23 @@ function TodoList(props) {
     setTodos(newTodos);
   };
 
+  // Handle Remove todo
+  const removeTodo = (id) => {
+    const removeArr = [...todos].filter((todo) => todo.id !== id);
+    setTodos(removeArr);
+  };
+
+  // Handle edit and update the todo list
+  const updateTodo = (todoId, newValue) => {
+    if (!newValue.text || /^\s*$/.test(newValue.text)) {
+      return;
+    }
+
+    setTodos((prev) =>
+      prev.map((item) => (item.id === todoId ? newValue : item))
+    );
+  };
+
   // Handle complete a todo list
   const completeTodo = (id) => {
     let updateTodos = todos.map((todo) => {
@@ -30,7 +47,12 @@ function TodoList(props) {
     <div>
       <h1>Plan for today</h1>
       <TodoForm onSubmit={addTodo} />
-      <Todo todos={todos} completeTodo={completeTodo} />
+      <Todo
+        todos={todos}
+        completeTodo={completeTodo}
+        removeTodo={removeTodo}
+        updateTodo={updateTodo}
+      />
     </div>
   );
 }
