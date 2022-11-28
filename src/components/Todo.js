@@ -11,7 +11,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     value: '',
   });
 
-  // Handle complete update todo list
+  // Handle submit updated todo
   const submitUpdate = (value) => {
     updateTodo(edit.id, value);
     setEdit({
@@ -20,16 +20,22 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     });
   };
 
+  // Display update input box if true
   if (edit.id) {
     return <TodoForm edit={edit} onSubmit={submitUpdate} />;
   }
 
+  // Render all todo list
   return todos.map((todo, index) => (
     <div
       key={index}
       className={todo.isComplete ? 'todo-row complete' : 'todo-row'}
     >
-      <div key={todo.id} onClick={() => completeTodo(todo.id)}>
+      <div
+        key={todo.id}
+        style={{ userSelect: 'none' }}
+        onClick={() => completeTodo(todo.id)}
+      >
         {todo.text}
       </div>
       <div className="icons">

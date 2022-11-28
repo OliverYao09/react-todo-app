@@ -6,7 +6,7 @@ function TodoList(props) {
   // State
   const [todos, setTodos] = useState([]);
 
-  // Handle create a todo list
+  // Handle create todo list
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
@@ -16,7 +16,7 @@ function TodoList(props) {
     setTodos(newTodos);
   };
 
-  // Handle Remove todo
+  // Handle Remove todo list
   const removeTodo = (id) => {
     const removeArr = [...todos].filter((todo) => todo.id !== id);
     setTodos(removeArr);

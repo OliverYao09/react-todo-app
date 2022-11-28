@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export function TodoForm(props) {
-  // State
-  const [input, setInput] = useState('');
+  // Ref
+  const inputRef = useRef(null);
 
-  // Handle add todo
+  // State
+  const [input, setInput] = useState(props.edit ? props.edit.value : '');
+
+  // useEffect - Initial render when page load
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
+  // Handle submit todo list
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -16,7 +24,7 @@ export function TodoForm(props) {
     setInput('');
   };
 
-  // Handle Input Change
+  // Handle todo input
   const handleChange = (event) => {
     setInput(event.target.value);
   };
@@ -28,11 +36,15 @@ export function TodoForm(props) {
         placeholder="Add a todo"
         value={input}
         name="text"
-        className="todo-input"
+        className={props.edit ? 'todo-input edit' : 'todo-input'}
         onChange={handleChange}
+        ref={inputRef}
       />
-      <button className="todo-button" onClick={handleSubmit}>
-        Add Todo
+      <button
+        className={props.edit ? 'todo-button edit' : 'todo-button'}
+        onClick={handleSubmit}
+      >
+        {props.edit ? 'Update Todo' : 'Add a todo'}
       </button>
     </form>
   );
