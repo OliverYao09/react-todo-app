@@ -4,7 +4,7 @@
 The intention of this app is to provide the ability for users to manage their to-do list for the day.
 
 
-## How to run this project?
+## Wanna run the app on localhost?
 
 1. Type `npm install` to install any necessary packages and dependencies.
 2. Type `npm start` to start the project on localhost.
